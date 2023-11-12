@@ -1,0 +1,9 @@
+*.pyc
+data/
+params/
+logs/
+wandb/
+models/ops/deformable_transformer_attention/build/
+models/ops/deformable_transformer_attention/dist/
+models/ops/deformable_transformer_attention/lib/
+models/ops/deformable_transformer_attention/MultiScaleDeformableAttention.egg-info/
