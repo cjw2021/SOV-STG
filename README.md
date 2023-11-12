@@ -144,7 +144,7 @@ sh configs/sov-stg-s.sh
 
 ### V-COCO
 
-Download our pre-trained DN-Deformable-DETR R101 model from [Google Drive]() to `params` folder.
+Download our pre-trained DN-Deformable-DETR R101 model from [Google Drive](https://drive.google.com/file/d/1nsWxibFeNj7gENzFzB620a6JbX_ln8ww/view?usp=sharing) to `params` folder.
 - Train SOV-STG-L
 
 ```bash
