@@ -148,9 +148,10 @@ Download our pre-trained DN-Deformable-DETR R101 model from [Google Drive](https
 - Train SOV-STG-L
 
 ```bash
-# paramter convert
+# paramter convert (optional)
 python convert_parameters.py \
     --dataset vcoco \
+    --load_path params/dn_dab_deformable_detr_r101.pth \
     --save_path params/sov-stg-l_vcoco.pth
 
 # train
