@@ -1,0 +1,8 @@
+opencv-python
+matplotlib
+loguru
+tabulate
+tqdm
+scipy
+addict
+yapf
