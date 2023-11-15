@@ -18,7 +18,7 @@ pip install -r requirements.txt
 - Compiling CUDA operators
 
 ```bash
-cd ./models/dn_dab_deformable_detr/ops
+cd ./models/ops/deformable_transformer_attention/
 sh ./make.sh
 # test
 python test.py
