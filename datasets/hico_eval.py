@@ -180,7 +180,7 @@ class HICOEvaluator():
         self.img_size_info = {}
         self.img_folder = os.path.join(dataset_path, 'images/test2015')
         self.anno_path = os.path.join(dataset_path, "annotations")
-        self.annotations = self.load_gt_dets_org_file()
+        self.annotations = self.load_gt_dets()
         self.hoi_list = json.load(open(os.path.join(self.anno_path, 'hoi_list_new.json'), 'r'))
         self.file_name_to_obj_cat = json.load(open(os.path.join(self.anno_path, 'file_name_to_obj_cat.json'), "r"))
         self.nms_thresh = nms_thresh
@@ -295,65 +295,6 @@ class HICOEvaluator():
                     }
                     gt_dets[global_id][hoi_id].append(det)
 
-        return gt_dets
-
-    def load_gt_dets_org_file(self):
-        # Load 
-        print('Loading test_hico.json ...')
-        anno_list = json.load(open(os.path.join(self.anno_path, 'test_hico.json'), "r"))
-        img_size_info = json.load(open(os.path.join(self.anno_path, 'img_size_info.json'), "r"))
-
-        gt_dets = {}
-        for anno in anno_list:
-            if "test" not in anno['file_name']:
-                continue
-
-            global_id = anno['file_name'].split(".")[0]
-            gt_dets[global_id] = {}
-            img_w, img_h = img_size_info[global_id]
-            self.img_size_info[global_id] = [img_h, img_w]
-
-            ###################################
-            # SAM Mask
-            ###################################
-            masks = []
-            for rles in anno['masks']:
-                mask = rle_to_mask(rles)  # (h, w)
-                mask = torch.as_tensor(mask, dtype=torch.uint8)  # (h, w)
-                masks.append(mask)
-            if masks:
-                masks = torch.stack(masks, dim=0)  # (n, h, w)
-            else:
-                masks = torch.zeros((0, img_h, img_w), dtype=torch.uint8)
-            ###################################
-
-            for hoi_idx, hoi in enumerate(anno['hoi_annotation']):
-                pair_masks = []
-                
-                verb_id = hoi['category_id']
-
-                human_idx = hoi['subject_id']
-                object_idx = hoi['object_id']
-                human_box = anno['annotations'][human_idx]['bbox']
-                object_box = anno['annotations'][object_idx]['bbox']
-                obj_id = anno['annotations'][object_idx]['category_id']
-
-                pair_mask = torch.logical_or(masks[human_idx], masks[object_idx])
-
-                for item in self.hoi_list:
-                    if item['object_cat'] == obj_id and item['verb_id'] == verb_id:
-                        hoi_id = item['id']
-                
-                if not hoi_id in gt_dets[global_id]:
-                    gt_dets[global_id][hoi_id] = []
-                
-                det = {
-                    'human_box': human_box,
-                    'object_box': object_box,
-                    'segm': pair_mask.numpy()
-                }
-                gt_dets[global_id][hoi_id].append(det)
-        
         return gt_dets
 
     def _ap_compute_set(self):
