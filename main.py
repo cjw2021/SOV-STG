@@ -197,6 +197,9 @@ def main(args):
     start_time = time.time()
     best_performance = 0
     for epoch in range(args.start_epoch, args.epochs):
+        if run:
+            run.log({'epoch': epoch})
+            run.log(test_stats)
         if args.distributed:
             sampler_train.set_epoch(epoch)
 
@@ -217,9 +220,7 @@ def main(args):
                 }, checkpoint_path)
         # Evaluate first and then save the checkpoint to prevent the checkpoint from being lost due to an accident during evaluate
         test_stats = evaluate_hoi(args.dataset_file, model, postprocessors, data_loader_val, args.subject_category_id, device, output_dir, epoch, args)
-        if run:
-            run.log({'epoch': epoch})
-            run.log(test_stats)
+
         if args.output_dir != '':
             checkpoint_path = output_dir / 'checkpoint_last.pth'
             utils.save_on_master({

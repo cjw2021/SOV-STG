@@ -1,7 +1,6 @@
 set -x
 PROJECT_NAME=hico
-EXP_NAME=sov-stg-swin-l_00001
-EXP_DIR=logs/${PROJECT_NAME}_${EXP_NAME}
+EXP_DIR=params
 
 python main.py \
   --dataset_file hico \
@@ -9,7 +8,7 @@ python main.py \
   --num_obj_classes 80 \
   --num_verb_classes 117 \
   --batch_size 2 \
-  --resume ${EXP_DIR}/checkpoint_best.pth \
-  --output_dir ${EXP_DIR}_eval \
+  --resume ${EXP_DIR}/sov-stg-swin-l.pth \
+  --output_dir sov-stg-swin-l_eval \
   -c slconfig/sov-stg-swin_l.py \
   --eval

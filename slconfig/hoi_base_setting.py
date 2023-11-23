@@ -1,7 +1,6 @@
 #############################
 # model setting
 #############################
-return_interm_layers   = False
 dilation               = False
 position_embedding     = 'sine'
 pe_temperatureH        = 20
@@ -39,4 +38,5 @@ nms_thresh             = 0.7
 nms_alpha              = 1.0
 nms_beta               = 0.5
 eval_extra             = False
+
 
