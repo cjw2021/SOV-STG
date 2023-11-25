@@ -1,3 +1,9 @@
+# ------------------------------------------------------------------------
+# SOV-STG
+# Copyright (c) 2023 Junwen Chen. All Rights Reserved.
+# Licensed under the Apache License, Version 2.0 [see LICENSE for details]
+# ------------------------------------------------------------------------
+
 import os
 import torch
 import torchvision.transforms as T
