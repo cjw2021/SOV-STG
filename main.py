@@ -186,9 +186,8 @@ def main(args):
         test_stats = evaluate_hoi(args.dataset_file, model, postprocessors, data_loader_val, args.subject_category_id, device, output_dir, -1, args)
         return
 
-    if run:
-        if args.use_wandb and ((not args.distributed or (args.distributed and args.rank == 0))):
-            wandb.watch(model, criterion, log="all", log_freq=100)
+    if run and ((not args.distributed or (args.distributed and args.rank == 0))):
+        wandb.watch(model, criterion, log="all", log_freq=100)
             
 
 
@@ -197,9 +196,6 @@ def main(args):
     start_time = time.time()
     best_performance = 0
     for epoch in range(args.start_epoch, args.epochs):
-        if run:
-            run.log({'epoch': epoch})
-            run.log(test_stats)
         if args.distributed:
             sampler_train.set_epoch(epoch)
 
@@ -221,6 +217,11 @@ def main(args):
         # Evaluate first and then save the checkpoint to prevent the checkpoint from being lost due to an accident during evaluate
         test_stats = evaluate_hoi(args.dataset_file, model, postprocessors, data_loader_val, args.subject_category_id, device, output_dir, epoch, args)
 
+        if run:
+            log_dict = test_stats.copy()
+            log_dict['epoch'] = epoch
+            run.log(log_dict)
+            
         if args.output_dir != '':
             checkpoint_path = output_dir / 'checkpoint_last.pth'
             utils.save_on_master({
