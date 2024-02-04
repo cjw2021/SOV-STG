@@ -20,7 +20,7 @@ num_patterns           = 0
 random_refpoints_xy    = False
 
 # dab-deformable-detr
-dec_n_points           = 8
+dec_n_points           = 4
 enc_n_points           = 4
 use_same_refpoint      = False
 
