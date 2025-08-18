@@ -1,5 +1,7 @@
 # SOV-STG
 
+Our [SOV-STG-VLA](https://openaccess.thecvf.com/content/WACV2025/html/Chen_Focusing_on_What_to_Decode_and_What_to_Train_SOV_WACV_2025_paper.html) is accepted by WACV2025. Our code is available [here](https://github.com/cjw2021/SOV-STG-VLA).
+
 Focusing on what to decode and what to train: Efficient Training with HOI Split Decoders and Specific Target Guided DeNoising ([paper](https://arxiv.org/abs/2307.02291))
 
 <img src="img/SOV-STG.jpg"  width="800"/>
@@ -160,9 +162,19 @@ sh configs/vcoco_sov-stg-l.sh
 ```
 
 ## Citation
-```
+
+```txt
+@inproceedings{chen2025focusing,
+  title={Focusing on what to Decode and what to Train: SOV Decoding with Specific Target Guided DeNoising and Vision Language Advisor},
+  author={Chen, Junwen and Wang, Yingcheng and Yanai, Keiji},
+  booktitle={2025 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  pages={9416--9425},
+  year={2025},
+  organization={IEEE}
+}
+
 @article{chen2023focusing,
-  title={Focusing on what to decode and what to train: Efficient Training with HOI Split Decoders and Specific Target Guided DeNoising},
+  title={Focusing on what to decode and what to train: SOV Decoding with Specific Target Guided DeNoising and Vision Language Advisor},
   author={Chen, Junwen and Wang, Yingcheng and Yanai, Keiji},
   journal={arXiv preprint arXiv:2307.02291},
   year={2023}
